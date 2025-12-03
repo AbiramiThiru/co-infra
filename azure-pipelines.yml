@@ -14,7 +14,7 @@ steps:
     inputs:
       azureSubscription: 'AbiramiserviceConnectionCICD'
       KeyVaultName: 'kvabiramibank'
-      SecretsFilter: 'carecreditno'
+      SecretsFilter: 'creditcardno'
       RunAsPreJob: true
 
   # 2️⃣ Print masked secret (for confirmation)
