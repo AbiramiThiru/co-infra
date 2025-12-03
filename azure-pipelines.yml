@@ -12,6 +12,7 @@ steps:
   # 1️⃣ Download secret from Key Vault
   - task: AzureKeyVault@2
     inputs:
+      azureSubscription: 'AbiramiserviceConnectionCICD'
       KeyVaultName: 'kvabiramibank'
       SecretsFilter: 'creditcardno'
       RunAsPreJob: true
