@@ -1,0 +1,30 @@
+trigger:
+  - main
+
+pool:
+  name: 'Default'
+
+variables:
+  SYSTEM_DEBUG: true
+  ApiSecret: ''
+
+steps:
+  # 1️⃣ Download secret from Key Vault
+  - task: AzureKeyVault@2
+    inputs:
+      azureSubscription: 'MyServiceConnectiont145'
+      KeyVaultName: 'kvabiramibank'
+      SecretsFilter: 'creditcardno'
+      RunAsPreJob: true
+
+  # 2️⃣ Print masked secret (for confirmation)
+  - script: |
+      echo "Using secret from Key Vault"
+      echo "ApiSecret is $(ApiSecret)"
+    displayName: 'Print Secret Value'
+
+  # 3️⃣ Check the secret length using PowerShell
+  - powershell: |
+      $value = "$(ApiSecret)"
+      Write-Host "Secret length: $($value.Length)"
+    displayName: 'Check secret length'
